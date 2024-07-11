@@ -174,11 +174,11 @@ class FeaturesSelection:
         # Plot eigenvalues and inflection point
         sorted_eigenvalues = sorted(self.pca.explained_variance_, reverse=True)
         plt.figure(figsize=(10, 4))
-        plt.plot(range(1, len(sorted_eigenvalues)+1), sorted_eigenvalues, marker='o')
-        plt.xlabel('N components')
-        plt.ylabel('Eigenvalues')
-        plt.title('Eigenvalues x N components')
-        plt.axvline(x=self.pca.n_components_, color='r', linestyle='--', label=f'Inflection Point: {self.pca.n_components_}')
+        plt.plot(range(1, len(sorted_eigenvalues)+1), sorted_eigenvalues, marker="o")
+        plt.xlabel("N components")
+        plt.ylabel("Eigenvalues")
+        plt.title("Eigenvalues x N components")
+        plt.axvline(x=self.pca.n_components_, color="r", linestyle="--", label=f"Inflection Point: {self.pca.n_components_}")
         plt.legend()
         plt.show()
     
@@ -199,7 +199,7 @@ class FeaturesSelection:
         anova_fit = anova_test.fit(X_transformed_scaled, self.data[self.target])
         
         # Extract feature scores and select top features based on scores
-        scores_df = pd.DataFrame({'feature': X_transformed_scaled.columns, 'score': anova_fit.scores_})
+        scores_df = pd.DataFrame({"feature": X_transformed_scaled.columns, "score": anova_fit.scores_})
         features_selected = scores_df.nlargest(self.pca.n_components_, "score")["feature"].tolist()
         
         # Update lists with intersection of selected_features
@@ -215,6 +215,7 @@ class FeaturesSelection:
             "log_columns": log_columns,
             "cubic_columns": cubic_columns
         }
+        return features_selected
     
     def save_mappings(self):
         """

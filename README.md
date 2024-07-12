@@ -11,6 +11,7 @@ For security reasons, the only non-encrypted column name is the target `class`
 The two main objectives of this project are:
 
 **To develop a failure prediction model from the offered dataset and put it in production to reduce costs**
+
 **To identify the main factors that point to a possible failure in the system**
 
 To achieve these objectives, the following technical sub-objectives were set:
@@ -40,9 +41,7 @@ The first step of this phase was to fix the huge data distribution problem. For 
 Since the dataset still had 161 features, a correlation matrix was done to see how many columns had a correlation of at least 0.5 with the target `class`, and PCA and ANOVA testing were used to first, see how many columns were needed to maintain 99% of the data variance and to choose them. The correlation matrix showed that 17 columns had at least a 0.5 correlation with the target, those being:
 
 ```json
-{
-    ["aa_000", "ah_000", "an_000", "ao_000", "ap_000", "aq_000", "bb_000", "bg_000", "bj_000", "bt_000", "bu_000", "bv_000", "bx_000", "by_000", "cc_000", "ci_000", "cq_000"]
-}
+["aa_000", "ah_000", "an_000", "ao_000", "ap_000", "aq_000", "bb_000", "bg_000", "bj_000", "bt_000", "bu_000", "bv_000", "bx_000", "by_000", "cc_000", "ci_000", "cq_000"]
 ```
 
 When applying PCA, the graph showed that the inflection point where the number of components retained 99% of the data variance was 67.

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Truck Air System Failure Prediction</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {background-color: #eff2f9;}
+
+        body .table thead th,
+        body .table tbody td,
+        body .table tbody th {
+            background-color: #eff2f9;
+        }
+    </style>
+</head>
+
+<body class="container mt-5">
+    <h1 class="mb-4">Truck Air System Failure Prediction</h1>
+    <form id="uploadForm" action="/dataset_predict" method="post" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label for="file" class="form-label">Upload Dataset:</label>
+            <input type="file" class="form-control" name="file" accept=".csv" required>
+        </div>
+        {% if error_message %}
+        <div class="alert alert-danger" role="alert">
+            {{ error_message }}
+        </div>
+        {% endif %}
+        <div class="mb-3 d-flex">
+            <button type="submit" class="btn btn-primary me-2">Predict with Dataset</button>
+            <a href="/" class="btn btn-secondary ms-2">Back</a>
+        </div>
+    </form>
+
+    {% if predicted_classes %}
+    <div class="mt-4">
+        <h2>Results:</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">Row</th>
+                    <th scope="col">Prediction</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for prediction in predicted_classes %}
+                <tr>
+                    <th scope="row">{{ loop.index }}</th>
+                    <td>{{ prediction }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+</body>
+</html>
